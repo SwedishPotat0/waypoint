@@ -23,7 +23,8 @@ To install Waypoint on unix you need to clone the repo, compile it and then plac
 
 ```bash
 git clone https://github.com/SwedishPotat0/waypoint
-g++ waypoint/*.cpp -o waypoint
+cd waypoint
+g++ *.cpp -o waypoint
 sudo mv waypoint /usr/local/bin/waypoint
 ```
 
