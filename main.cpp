@@ -10,15 +10,14 @@ const char* GREEN = "\033[32m";
 
 void throwError(std::string errorMSG) { std::cout << RED << "Error: " << RESET; std::cout << errorMSG << '\n'; }
 
-void checkDir() {
+bool checkDir() {
 	std::filesystem::path dir = std::string(getenv("HOME")) + "/.waypoint";
-	if (!std::filesystem::exists(dir)) { std::filesystem::create_directory(dir); }
+	if (!std::filesystem::exists(dir)) { std::filesystem::create_directory(dir); return true;}
+	return false;
 }
 
 int main(int argc, char* argv[]) {
-	checkDir();
-
-	if (argc < 3) { throwError("It needs to be atleast 2 arguments"); return 1;}
+	if (!checkDir()) { if (argc < 3) { throwError("It needs to be atleast 2 arguments"); return 1;}
 		 
 	std::string arg = argv[1];
 	std::string name = argv[2];
@@ -59,4 +58,4 @@ int main(int argc, char* argv[]) {
 		std::string line;
 		while (getline(read, line)) { std::cout << line << std::endl; }
 	}
-}
+}}
