@@ -54,8 +54,16 @@ int main(int argc, char* argv[]) {
 		// Put code here
 	} else if (arg == "tag") { throwError("tag needs 3 arguments"); return 1;}
 	if (arg == "list") {
+		if (name == "all") {
 		std::ifstream read(path);
 		std::string line;
 		while (getline(read, line)) { std::cout << line << std::endl; }
+		} else if (name == "name") {
+			if (argc != 4) {throwError("Parameter NAME needs 3 arguments"); return 1;}
+		} else if (name == "tag") {
+			if (argc != 4) {throwError("Parameter TAG needs 3 arguments"); return 1;}
+		} else if (name == "group") {
+			if (argc != 4) {throwError("Parameter GROUP needs 3 arguments"); return 1;}
+		} else {throwError("Unkown parameter for list"); return 1;}
 	}
 }}
