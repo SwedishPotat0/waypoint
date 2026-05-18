@@ -12,7 +12,7 @@ void throwError(std::string errorMSG) { std::cout << RED << "Error: " << RESET; 
 
 void makeConfig() {
 	std::ofstream write(std::string(getenv("HOME")) + "/.waypoint/config.txt", std::ios::app);
-	write << "editor = vim";
+	write << "editor=vim";
 }
 
 bool checkDir() {
@@ -29,11 +29,11 @@ std::string getEditor() {
 	bool parameterTrue = false;
 
 	while(getline(read, line)) {
-		for (size_t i =1; i < line.length(); i++) {
-			if (line[i] != ' ') {
+		for (size_t i = 0; i < line.length(); i++) {
 				if (line[i] == '=') {
 					if (parameter == "editor") {
 						parameterTrue = true;
+						continue;
 					}	
 				} else {
 					parameter += line[i];
@@ -41,11 +41,9 @@ std::string getEditor() {
 
 				if (parameterTrue) {
 					editor += line[i];
-					break;
 				}
-			}
-			
 		}
+		if (!editor.empty()) {break;}
 	}
 
 
@@ -59,7 +57,7 @@ int main(int argc, char* argv[]) {
 		 
 	std::string arg = argv[1];
 	std::string name = argv[2];
-	std::string prg = "vim";
+	std::string prg = getEditor();
 	std::string path = std::string(getenv("HOME")) + "/.waypoint/waypoint.txt";
 
 	if (arg == "jump") {
