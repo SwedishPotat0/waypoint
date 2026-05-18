@@ -10,14 +10,52 @@ const char* GREEN = "\033[32m";
 
 void throwError(std::string errorMSG) { std::cout << RED << "Error: " << RESET; std::cout << errorMSG << '\n'; }
 
+void makeConfig() {
+	std::ofstream write(std::string(getenv("HOME")) + "/.waypoint/config.txt", std::ios::app);
+	write << "editor = vim";
+}
+
 bool checkDir() {
 	std::filesystem::path dir = std::string(getenv("HOME")) + "/.waypoint";
-	if (!std::filesystem::exists(dir)) { std::filesystem::create_directory(dir); return true;}
+	if (!std::filesystem::exists(dir)) { std::filesystem::create_directory(dir); makeConfig();  return true;}
 	return false;
 }
 
+std::string getEditor() {
+	std::string editor = "";
+	std::string parameter = "";
+	std::string line;
+	std::fstream read(std::string(getenv("HOME")) + "/.waypoint/config.txt");
+	bool parameterTrue = false;
+
+	while(getline(read, line)) {
+		for (size_t i =1; i < line.length(); i++) {
+			if (line[i] != ' ') {
+				if (line[i] == '=') {
+					if (parameter == "editor") {
+						parameterTrue = true;
+					}	
+				} else {
+					parameter += line[i];
+				}
+
+				if (parameterTrue) {
+					editor += line[i];
+					break;
+				}
+			}
+			
+		}
+	}
+
+
+	return editor;
+}
+
 int main(int argc, char* argv[]) {
-	if (!checkDir()) { if (argc < 3) { throwError("It needs to be atleast 2 arguments"); return 1;}
+	if (checkDir()) {std::cout << GREEN << "Succseded to creat directory\n" << RESET; return 0;}
+	else if (!checkDir()) { if (argc < 3) { throwError("It needs to be atleast 2 arguments"); return 1;}
+	
 		 
 	std::string arg = argv[1];
 	std::string name = argv[2];
@@ -60,10 +98,13 @@ int main(int argc, char* argv[]) {
 		while (getline(read, line)) { std::cout << line << std::endl; }
 		} else if (name == "name") {
 			if (argc != 4) {throwError("Parameter NAME needs 3 arguments"); return 1;}
+			std::string search = argv[3];
 		} else if (name == "tag") {
 			if (argc != 4) {throwError("Parameter TAG needs 3 arguments"); return 1;}
+			std::string search = argv[3];
 		} else if (name == "group") {
 			if (argc != 4) {throwError("Parameter GROUP needs 3 arguments"); return 1;}
+			std::string search = argv[3];
 		} else {throwError("Unkown parameter for list"); return 1;}
 	}
 }}

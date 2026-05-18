@@ -10,8 +10,6 @@ waypoint open main
 ```
 This will add project1's main.cpp under the name main and then directly open it up by just using the name main.
 
-**Note: Currently only supports vim**
-
 ## How to install
 
 **Support on Windows and Mac is currently untested.**
@@ -108,7 +106,7 @@ Waypoint has a selection of simple commands, these are:
 
 - [ ] Implement all planned parameters for list (tag, group, name)
 
-- [ ] Add waypoint config file
+- [x] Add waypoint config file
 
 - [ ] Create Vim plugin
 
