@@ -49,7 +49,7 @@ Waypoint has a selection of simple commands, these are:
     waypoint add main ~/Documents/project1/main.cpp
     ```
 
-* Open - Opens your files in a text editor **(Currently only supports vim)**
+* Open - Opens your files in a text editor
 
     Example:
     ```bash

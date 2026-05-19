@@ -9,10 +9,12 @@ const char* RED = "\033[31m";
 const char* GREEN = "\033[32m";
 
 void throwError(std::string errorMSG) { std::cout << RED << "Error: " << RESET; std::cout << errorMSG << '\n'; }
+void throwSuccses(std::string succsesMSG) {std::cout << GREEN << succsesMSG << RESET << '\n';}
 
 void makeConfig() {
 	std::ofstream write(std::string(getenv("HOME")) + "/.waypoint/config.txt", std::ios::app);
-	write << "editor=vim";
+	write << "editor=vim" << '\n';
+	write.close();
 }
 
 bool checkDir() {
@@ -29,30 +31,22 @@ std::string getEditor() {
 	bool parameterTrue = false;
 
 	while(getline(read, line)) {
+		parameter = "";
 		for (size_t i = 0; i < line.length(); i++) {
 				if (line[i] == '=') {
-					if (parameter == "editor") {
-						parameterTrue = true;
-						continue;
-					}	
-				} else {
-					parameter += line[i];
-				}
-
-				if (parameterTrue) {
-					editor += line[i];
-				}
+					if (parameter == "editor") { parameterTrue = true; continue;}	
+				} else { parameter += line[i];}
+				if (parameterTrue) { editor += line[i];}
 		}
 		if (!editor.empty()) {break;}
 	}
-
-
 	return editor;
 }
 
 int main(int argc, char* argv[]) {
-	if (checkDir()) {std::cout << GREEN << "Succseded to creat directory\n" << RESET; return 0;}
-	else if (!checkDir()) { if (argc < 3) { throwError("It needs to be atleast 2 arguments"); return 1;}
+	bool dir = checkDir();
+	if (dir) { throwSuccses("Succseded to creat directory & config file"); return 0;}
+	else if (!dir) { if (argc < 3) { throwError("It needs to be atleast 2 arguments"); return 1;}
 	
 		 
 	std::string arg = argv[1];
@@ -67,7 +61,7 @@ int main(int argc, char* argv[]) {
 		std::string location;
 		std::ifstream read(path);
 		std::string line;
-
+ 
 		bool nameTrue = false;
 		while (getline(read, line)) { 
 			std::string word = "";
@@ -103,6 +97,6 @@ int main(int argc, char* argv[]) {
 		} else if (name == "group") {
 			if (argc != 4) {throwError("Parameter GROUP needs 3 arguments"); return 1;}
 			std::string search = argv[3];
-		} else {throwError("Unkown parameter for list"); return 1;}
+		} else {throwError("Unkown parameter for list: " + name ); return 1;}
 	}
 }}
