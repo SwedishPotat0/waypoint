@@ -17,6 +17,7 @@ This will add project1's main.cpp under the name main and then directly open it 
 Requirements: g++
 <details>
 <summary>Manual Install</summary>
+
 To install Waypoint on unix you need to clone the repo, compile it and then place it in `/usr/local/bin` to make it globally callable.
 
 ```bash
@@ -31,6 +32,7 @@ And now you should be able to call `waypoint` in your terminal.
 
 <details>
 <summary>Automatic Install</summary>
+
 Coming soon
 </details>
 
