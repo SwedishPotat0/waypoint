@@ -47,7 +47,6 @@ int main(int argc, char* argv[]) {
 	bool dir = checkDir();
 	if (dir) { throwSuccses("Succseded to creat directory & config file"); return 0;}
 	else if (!dir) { if (argc < 3) { throwError("It needs to be atleast 2 arguments"); return 1;}
-	
 		 
 	std::string arg = argv[1];
 	std::string name = argv[2];
@@ -62,14 +61,15 @@ int main(int argc, char* argv[]) {
 		std::ifstream read(path);
 		std::string line;
  
-		bool nameTrue = false;
 		while (getline(read, line)) { 
 			std::string word = "";
+			bool nameTrue = false;
 			for (size_t i = 0; i < line.length(); i++) {
 				if (line[i] == ' ') { if (!word.empty()) { if (word == name) {
-					nameTrue = true;			
+					nameTrue = true;
+					continue;			
 				} } } else {word += line[i];}
-				if (nameTrue) { location += line[i]; }
+				if (nameTrue) { if(line[i] == '\n'){break;} location += line[i]; }
 			}}	
 		std::string cmd = prg + " " + location;
 		system(cmd.c_str());
@@ -98,5 +98,22 @@ int main(int argc, char* argv[]) {
 			if (argc != 4) {throwError("Parameter GROUP needs 3 arguments"); return 1;}
 			std::string search = argv[3];
 		} else {throwError("Unkown parameter for list: " + name ); return 1;}
+	}
+	if (arg == "getPath") {
+		std::string location;
+		std::ifstream read(path);
+		std::string line;
+ 	
+		while (getline(read, line)) { 
+			std::string word = "";
+			bool nameTrue = false;
+			for (size_t i = 0; i < line.length(); i++) {
+				if (line[i] == ' ') { if (!word.empty()) { if (word == name) {
+					nameTrue = true;
+					continue;			
+				} } } else {word += line[i];}
+				if (nameTrue) { if(line[i] == '\n'){break;} location += line[i]; }
+			}}
+		std::cout << location;
 	}
 }}
