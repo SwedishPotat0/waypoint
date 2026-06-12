@@ -65,11 +65,11 @@ int main(int argc, char* argv[]) {
 			std::string word = "";
 			bool nameTrue = false;
 			for (size_t i = 0; i < line.length(); i++) {
-				if (line[i] == ' ') { if (!word.empty()) { if (word == name) {
+				if (line[i] == '|') { if (!word.empty()) { if (word == name) {
 					nameTrue = true;
 					continue;			
 				} } } else {word += line[i];}
-				if (nameTrue) { if(line[i] == '\n'){break;} location += line[i]; }
+				if (nameTrue) { if(line[i] == '|'){break;} location += line[i]; }
 			}}	
 		std::string cmd = prg + " " + location;
 		system(cmd.c_str());
@@ -77,17 +77,36 @@ int main(int argc, char* argv[]) {
 	if (arg == "add" && argc == 4) {
 		std::string file = argv[3];
 		std::ofstream write(path, std::ios::app);
-		write << name << " " << file << " " << '\n';
+		write << name << "|" << file << "|" << '\n';
 		write.close();
 	} else if (arg == "add") { throwError("add needs 3 arguments"); return 1;}
 	if (arg == "tag" && argc == 4) {
-		// Put code here
+		std::string location;
+		std::ifstream read(path);
+		std::string line;
+		std::string row;
+		int index = 0;
+		std::string tag = argv[3];
+ 
+		while (getline(read, line)) { 
+			std::string word = "";
+			bool nameTrue = false;
+			if (!row.empty()) {break;}
+			for (size_t i = 0; i < line.length(); i++) {
+				if (line[i] == '|') { if (!word.empty()) { if (word == name) {
+					nameTrue = true;
+					row += word;
+					continue;			
+				} } } else {word += line[i];}
+				if (nameTrue) {row += line[i];}
+			}index++;}
+		row += tag;
 	} else if (arg == "tag") { throwError("tag needs 3 arguments"); return 1;}
 	if (arg == "list") {
 		if (name == "all") {
 		std::ifstream read(path);
 		std::string line;
-		while (getline(read, line)) { std::cout << line << std::endl; }
+		while (getline(read, line)) {std::cout << line << std::endl;}
 		} else if (name == "name") {
 			if (argc != 4) {throwError("Parameter NAME needs 3 arguments"); return 1;}
 			std::string search = argv[3];
@@ -108,11 +127,11 @@ int main(int argc, char* argv[]) {
 			std::string word = "";
 			bool nameTrue = false;
 			for (size_t i = 0; i < line.length(); i++) {
-				if (line[i] == ' ') { if (!word.empty()) { if (word == name) {
+				if (line[i] == '|') { if (!word.empty()) { if (word == name) {
 					nameTrue = true;
 					continue;			
 				} } } else {word += line[i];}
-				if (nameTrue) { if(line[i] == '\n'){break;} location += line[i]; }
+				if (nameTrue) { if(line[i] == '|'){break;} location += line[i]; }
 			}}
 		std::cout << location;
 	}
