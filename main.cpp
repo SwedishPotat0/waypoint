@@ -98,6 +98,7 @@ int main(int argc, char* argv[]) {
 				if (line[i] == '|') { if (!word.empty()) { if (word == name) {
 					nameTrue = true;
 					row += word;
+					row += '|';
 					continue;			
 				} } } else {word += line[i];}
 				if (nameTrue) {row += line[i];}
