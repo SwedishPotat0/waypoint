@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
+#include <vector>
 
 const char* RESET = "\033[0m";
 const char* RED = "\033[31m";
@@ -87,11 +88,12 @@ int main(int argc, char* argv[]) {
 		std::string row;
 		int index = 0;
 		std::string tag = argv[3];
+		std::vector<std::string> rows;
  
 		while (getline(read, line)) { 
 			std::string word = "";
 			bool nameTrue = false;
-			if (!row.empty()) {break;}
+			row = "";
 			for (size_t i = 0; i < line.length(); i++) {
 				if (line[i] == '|') { if (!word.empty()) { if (word == name) {
 					nameTrue = true;
@@ -99,8 +101,11 @@ int main(int argc, char* argv[]) {
 					continue;			
 				} } } else {word += line[i];}
 				if (nameTrue) {row += line[i];}
-			}index++;}
-		row += tag;
+			}if(nameTrue){row += tag; rows.push_back(row);}else{rows.push_back(line);}}
+		std::ofstream write(path);
+		for (const auto& r : rows) { write << r << '\n'; }
+		write.close();
+
 	} else if (arg == "tag") { throwError("tag needs 3 arguments"); return 1;}
 	if (arg == "list") {
 		if (name == "all") {

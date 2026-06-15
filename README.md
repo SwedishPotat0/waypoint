@@ -70,15 +70,15 @@ Waypoint has a selection of simple commands, these are:
     main ~/Documents/project1/main.cpp
     ```
 
-<details>
-<summary>Planned Commands</summary>
-
 * Tag - Tags a bookmark with the given tag
 
     Example:
     ```bash
     waypoint tag main important
     ```
+
+<details>
+<summary>Planned Commands</summary>
 
 * Group - Group together files that for example belong to the same project 
 
