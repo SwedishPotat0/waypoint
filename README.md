@@ -115,6 +115,6 @@ Waypoint has a selection of simple commands, these are:
 
 - [x] Add waypoint config file
 
-- [ ] Create Vim plugin
+- [x] Create Vim plugin - See [waypoint.vim](https://github.com/SwedishPotat0/waypoint.vim)
 
 - [ ] Add project specific waypoint files
