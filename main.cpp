@@ -44,13 +44,34 @@ std::string getEditor() {
 	return editor;
 }
 
+std::vector<std::string> splitWaypoint(std::string waypoint) {
+	std::string name = ""; std::string location = ""; std::string tag = "";	
+	bool nameC = false; bool locationC = false; bool tagC = false;
+	std::vector<std::string> Waypoint;
+	for (size_t i = 0; i < waypoint.length(); i++) {
+		if (waypoint[i] == '|') {
+			if (name != "") {nameC = true;}
+			if (location != "") {locationC = true;}
+			continue;
+		}
+		if (locationC) {tag += waypoint[i];}
+		else if (nameC) {location += waypoint[i];}	
+		else {name += waypoint[i];}
+	}
+	Waypoint.push_back(name);
+	Waypoint.push_back(location);
+	Waypoint.push_back(tag);
+
+	return Waypoint;
+}
+
 int main(int argc, char* argv[]) {
 	bool dir = checkDir();
 	if (dir) { throwSuccses("Succseded to creat directory & config file"); return 0;}
-	else if (!dir) { if (argc < 3) { throwError("It needs to be atleast 2 arguments"); return 1;}
+	else if (!dir) { if (argc < 2) { throwError("It needs to be atleast 1 arguments"); return 1;}
 		 
 	std::string arg = argv[1];
-	std::string name = argv[2];
+	std::string name; if (argc > 2) {name = argv[2];} else {name = "";}
 	std::string prg = getEditor();
 	std::string path = std::string(getenv("HOME")) + "/.waypoint/waypoint.txt";
 
@@ -61,17 +82,15 @@ int main(int argc, char* argv[]) {
 		std::string location;
 		std::ifstream read(path);
 		std::string line;
+		std::vector<std::string> waypoint;
  
 		while (getline(read, line)) { 
-			std::string word = "";
-			bool nameTrue = false;
-			for (size_t i = 0; i < line.length(); i++) {
-				if (line[i] == '|') { if (!word.empty()) { if (word == name) {
-					nameTrue = true;
-					continue;			
-				} } } else {word += line[i];}
-				if (nameTrue) { if(line[i] == '|'){break;} location += line[i]; }
-			}}	
+			waypoint = splitWaypoint(line);
+			if (name == waypoint[0]) {
+				location = waypoint[1];
+				break;
+			}
+		}
 		std::string cmd = prg + " " + location;
 		system(cmd.c_str());
 	}
@@ -89,20 +108,20 @@ int main(int argc, char* argv[]) {
 		int index = 0;
 		std::string tag = argv[3];
 		std::vector<std::string> rows;
- 
+		std::vector<std::string> waypoint;
+
 		while (getline(read, line)) { 
 			std::string word = "";
 			bool nameTrue = false;
 			row = "";
-			for (size_t i = 0; i < line.length(); i++) {
-				if (line[i] == '|') { if (!word.empty()) { if (word == name) {
-					nameTrue = true;
-					row += word;
-					row += '|';
-					continue;			
-				} } } else {word += line[i];}
-				if (nameTrue) {row += line[i];}
-			}if(nameTrue){row += tag; rows.push_back(row);}else{rows.push_back(line);}}
+			waypoint = splitWaypoint(line);
+			if (name == waypoint[0]) {
+				nameTrue = true;
+				row += waypoint[0]; row += '|'; 
+				row += waypoint[1]; row += '|';
+				if (waypoint[2] != "") { row += waypoint[2]; row += '|';}
+			}
+			if(nameTrue){row += tag; rows.push_back(row);}else{rows.push_back(line);}}
 		std::ofstream write(path);
 		for (const auto& r : rows) { write << r << '\n'; }
 		write.close();
@@ -128,17 +147,23 @@ int main(int argc, char* argv[]) {
 		std::string location;
 		std::ifstream read(path);
 		std::string line;
- 	
+		std::vector<std::string> waypoint;
+
 		while (getline(read, line)) { 
-			std::string word = "";
-			bool nameTrue = false;
-			for (size_t i = 0; i < line.length(); i++) {
-				if (line[i] == '|') { if (!word.empty()) { if (word == name) {
-					nameTrue = true;
-					continue;			
-				} } } else {word += line[i];}
-				if (nameTrue) { if(line[i] == '|'){break;} location += line[i]; }
-			}}
+			waypoint = splitWaypoint(line);
+			if (name == waypoint[0]) {
+				location = waypoint[1];
+				break;
+			}
+		}
 		std::cout << location;
+	}
+	if (arg == "remove") {
+
+	}
+	if (arg == "init") {
+		std::filesystem::path dir = ".waypoint";
+		if (!std::filesystem::exists(dir)) { std::filesystem::create_directory(dir);}
+		else {std::cout << "Local Waypoint alredy exsists";}
 	}
 }}
