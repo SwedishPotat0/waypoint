@@ -123,9 +123,9 @@ Waypoint has a selection of simple commands, these are:
 
     - [x] Tag
 
-    - [  ] Group
+    - [ ] Group
 
-- [  ] Make list function for names/tags/groups that containe the filter term
+- [ ] Make list function for names/tags/groups that containe the filter term
 
 - [x] Add waypoint config file
 
