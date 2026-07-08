@@ -65,6 +65,24 @@ std::vector<std::string> splitWaypoint(std::string waypoint) {
 	return Waypoint;
 }
 
+std::string trimLocation(std::string location) {
+	std::vector<std::string> path;
+	std::string temp = "";
+	std::string Location;
+	for (size_t i = 0; i < location.length(); i++) {
+		if (location[i] == '/') {
+			if (temp != "") {
+				path.push_back(temp+"/");
+				temp = "";
+				continue;
+			}
+		}
+		temp += location[i];
+	}	
+	for (const auto& p : path) {Location += p;}
+	return Location;
+}
+
 int main(int argc, char* argv[]) {
 	bool dir = checkDir();
 	if (dir) { throwSuccses("Succseded to creat directory & config file"); return 0;}
@@ -76,7 +94,20 @@ int main(int argc, char* argv[]) {
 	std::string path = std::string(getenv("HOME")) + "/.waypoint/waypoint.txt";
 
 	if (arg == "jump") {
-		// Put code here
+		std::string location;
+		std::ifstream read(path);
+		std::string line;
+		std::vector<std::string> waypoint;
+ 
+		while (getline(read, line)) { 
+			waypoint = splitWaypoint(line);
+			if (name == waypoint[0]) {
+				location = waypoint[1];
+				break;
+			}
+		}
+		location = trimLocation(location);
+		std::cout << location;
 	}
 	if (arg == "open") {	
 		std::string location;
@@ -159,6 +190,22 @@ int main(int argc, char* argv[]) {
 		std::cout << location;
 	}
 	if (arg == "remove") {
+		std::ifstream read(path);
+		std::string line;
+		std::vector<std::string> waypoint;
+		std::vector<std::string> row;
+ 
+		while (getline(read, line)) { 
+			waypoint = splitWaypoint(line);
+			if (name == waypoint[0]) {
+				continue;
+			} else {
+				row.push_back(line);
+			}
+		}
+		std::ofstream write(path);
+		for (const auto& r : row) { write << r << '\n'; }
+		write.close();
 
 	}
 	if (arg == "init") {

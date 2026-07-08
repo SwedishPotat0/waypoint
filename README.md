@@ -82,6 +82,13 @@ Waypoint has a selection of simple commands, these are:
     waypoint tag main important
     ```
 
+* Remove - Removes the targeted bookmark from waypoint 
+
+    Example:
+    ```bash
+    waypoint remove main
+    ```
+
 <details>
 <summary>Planned Commands</summary>
 
@@ -90,13 +97,6 @@ Waypoint has a selection of simple commands, these are:
     Example:
     ```bash
     waypoint group main project1
-    ```
-
-* Remove - Removes the targeted bookmark from waypoint 
-
-    Example:
-    ```bash
-    waypoint remove main
     ```
 
 * Jump - Jump to the location of the bookmark in your filesystem 
