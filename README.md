@@ -69,7 +69,7 @@ Waypoint has a selection of simple commands, these are:
     waypoint open main
     ```
 
-* List - List bookmarks that match the given parameter **(Currently the only parameter: all)**
+* List - List bookmarks that match the given parameter 
 
     Example:
     ```bash
@@ -117,7 +117,15 @@ Waypoint has a selection of simple commands, these are:
 
 - [ ] Implement All listed commands under planned commands
 
-- [ ] Implement all planned parameters for list (tag, group, name)
+- [ ] Implement all planned parameters for list
+
+    - [x] Name
+
+    - [x] Tag
+
+    - [  ] Group
+
+- [  ] Make list function for names/tags/groups that containe the filter term
 
 - [x] Add waypoint config file
 
