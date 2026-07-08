@@ -38,7 +38,13 @@ And now you should be able to call `waypoint` in your terminal.
 <details>
 <summary>Automatic Install</summary>
 
-Coming soon
+You can do a automated install of waypoint by running the `install.sh`
+
+```bash
+git clone https://github.com/SwedishPotat0/waypoint
+cd waypoint
+bash install.sh
+```
 </details>
 
 After installing waypoint try to run `waypoint` in your terminal to allow it to generate necessary files.
