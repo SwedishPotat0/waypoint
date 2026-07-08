@@ -159,16 +159,25 @@ int main(int argc, char* argv[]) {
 
 	} else if (arg == "tag") { throwError("tag needs 3 arguments"); return 1;}
 	if (arg == "list") {
-		if (name == "all") {
 		std::ifstream read(path);
 		std::string line;
-		while (getline(read, line)) {std::cout << line << std::endl;}
+		std::vector<std::string> waypoint;
+		if (name == "all") {	
+			while (getline(read, line)) {std::cout << line << std::endl;}
 		} else if (name == "name") {
 			if (argc != 4) {throwError("Parameter NAME needs 3 arguments"); return 1;}
 			std::string search = argv[3];
+			while (getline(read, line)) {
+				waypoint = splitWaypoint(line);
+				if (search == waypoint[0]) {std::cout << line << std::endl;}
+			}
 		} else if (name == "tag") {
 			if (argc != 4) {throwError("Parameter TAG needs 3 arguments"); return 1;}
 			std::string search = argv[3];
+			while (getline(read, line)) {
+				waypoint = splitWaypoint(line);
+				if (search == waypoint[2]) {std::cout << line << std::endl;}
+			}
 		} else if (name == "group") {
 			if (argc != 4) {throwError("Parameter GROUP needs 3 arguments"); return 1;}
 			std::string search = argv[3];
