@@ -2,7 +2,7 @@
 
 Waypoint is a CLI tool for fast file navigation through bookmarks, tags & groups in a terminal centric workflow.
 
-Have you ever forgotten where a file in your project is located? Then Waypoint could be for you, instead of having to remember filepaths you can instead open your files through memorable names.
+Have you ever forgotten where a file in your project is located? Then Waypoint could be for you, instead of having to remember file-paths you can instead open your files through memorable names.
 
 ```bash
 waypoint add main ~/Documents/project1/main.cpp
@@ -13,7 +13,7 @@ This will add project1's main.cpp under the name main and then directly open it 
 ## Why use waypoint?
 So why use waypoint if you already use tools like fzf?
 fzf is designed to fuzzy search across your filesystem, quickly helping you find files based on potential matches.
-Waypoint takes another approach, it lets you assign memorable, persistant names to files and access them instantly by said names.
+Waypoint takes another approach, it lets you assign memorable, persistent names to files and access them instantly by said names.
 
 ## How to install
 
@@ -49,13 +49,13 @@ bash install.sh
 
 After installing waypoint try to run `waypoint` in your terminal to allow it to generate necessary files.
 
-After first run you will find all default Waypoint files in `~/.waypoint`, you can modify these manually, but be sure to keep to the fileformating that Waypoint has automatically made, otherwise it could break things.
+After first run you will find all default Waypoint files in `~/.waypoint`, you can modify these manually, but be sure to keep to the file-formatting that Waypoint has automatically made, otherwise it could break things.
 
 ## How to use Waypoint
 
 Waypoint has a selection of simple commands, these are:
 
-* Add - Adds a filepath with a short name to your bookmarks
+* Add - Adds a file-path with a short name to your bookmarks
     
     Example:
     ``` bash
@@ -125,7 +125,7 @@ Waypoint has a selection of simple commands, these are:
 
     - [ ] Group
 
-- [ ] Make list function for names/tags/groups that containe the filter term
+- [ ] Make list function for names/tags/groups that contain the filter term
 
 - [x] Add waypoint config file
 
