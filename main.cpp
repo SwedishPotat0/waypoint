@@ -64,38 +64,10 @@ int main(int argc, char* argv[]) {
 		return list(path, name, argv, argc);		
 	}
 	if (arg == "getPath") {
-		std::string location;
-		std::ifstream read(path);
-		std::string line;
-		std::vector<std::string> waypoint;
-
-		while (getline(read, line)) { 
-			waypoint = splitWaypoint(line);
-			if (name == waypoint[0]) {
-				location = waypoint[1];
-				break;
-			}
-		}
-		std::cout << location;
+		getPath(path, name);
 	}
 	if (arg == "remove") {
-		std::ifstream read(path);
-		std::string line;
-		std::vector<std::string> waypoint;
-		std::vector<std::string> row;
- 
-		while (getline(read, line)) { 
-			waypoint = splitWaypoint(line);
-			if (name == waypoint[0]) {
-				continue;
-			} else {
-				row.push_back(line);
-			}
-		}
-		std::ofstream write(path);
-		for (const auto& r : row) { write << r << '\n'; }
-		write.close();
-
+		remove(path, name);
 	}
 	if (arg == "init") {
 		std::filesystem::path dir = ".waypoint";

@@ -59,3 +59,39 @@ int list(std::string path, std::string name, char** argv, int argc) {
 	} else {throwError("Unkown parameter for list: " + name ); return 1;}
 	return 0;
 }
+
+void remove(std::string path, std::string name) {
+	std::ifstream read(path);
+	std::string line;
+	std::vector<std::string> waypoint;
+	std::vector<std::string> row;
+ 
+	while (getline(read, line)) { 
+		waypoint = splitWaypoint(line);
+		if (name == waypoint[0]) {
+			continue;
+		} else {
+			row.push_back(line);
+		}
+	}
+	std::ofstream write(path);
+	for (const auto& r : row) { write << r << '\n'; }
+	write.close();
+
+}
+
+void getPath(std::string path, std::string name) {
+	std::string location;
+	std::ifstream read(path);
+	std::string line;
+	std::vector<std::string> waypoint;
+
+	while (getline(read, line)) { 
+		waypoint = splitWaypoint(line);
+		if (name == waypoint[0]) {
+			location = waypoint[1];
+			break;
+		}
+	}
+	std::cout << location;
+}
