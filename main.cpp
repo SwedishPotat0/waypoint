@@ -19,41 +19,13 @@ int main(int argc, char* argv[]) {
 	std::string prg = getEditor();
 	std::string path = std::string(getenv("HOME")) + "/.waypoint/waypoint.txt";
 
-	if (arg == "jump") {
-		jump(path, name);
+	if (arg == "jump") { jump(path, name); }
+	if (arg == "open") { open(path, name, prg); }
+	if (arg == "add" && argc == 4) { add(path, name, argv); } else if (arg == "add") { throwError("add needs 3 arguments"); return 1;}
+	if (arg == "tag" && argc == 4) { tag(path, name, argv[3]); } else if (arg == "tag") { throwError("tag needs 3 arguments"); return 1;}
+	if (arg == "list") { return list(path, name, argv, argc); }
+	if (arg == "getPath") { getPath(path, name); }
+	if (arg == "remove") { remove(path, name); }
+	if (arg == "init") { init(); }
 	}
-	if (arg == "open") {	
-		std::string location;
-		std::ifstream read(path);
-		std::string line;
-		std::vector<std::string> waypoint;
- 
-		while (getline(read, line)) { 
-			waypoint = splitWaypoint(line);
-			if (name == waypoint[0]) {
-				location = waypoint[1];
-				break;
-			}
-		}
-		std::string cmd = prg + " " + location;
-		system(cmd.c_str());
-	}
-	if (arg == "add" && argc == 4) {
-		add(path, name, argv);
-	} else if (arg == "add") { throwError("add needs 3 arguments"); return 1;}
-	if (arg == "tag" && argc == 4) {				
-		tag(path, name, argv[3]);
-	} else if (arg == "tag") { throwError("tag needs 3 arguments"); return 1;}
-	if (arg == "list") {
-		return list(path, name, argv, argc);		
-	}
-	if (arg == "getPath") {
-		getPath(path, name);
-	}
-	if (arg == "remove") {
-		remove(path, name);
-	}
-	if (arg == "init") {
-		init();
-	}
-}}
+}

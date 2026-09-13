@@ -140,3 +140,20 @@ void add(std::string path, std::string name, char** argv) {
 		write.close();
 	}
 }
+
+void open(std::string path, std::string name, std::string prg) {
+	std::string location;
+	std::ifstream read(path);
+	std::string line;
+	std::vector<std::string> waypoint;
+ 
+	while (getline(read, line)) { 
+		waypoint = splitWaypoint(line);
+		if (name == waypoint[0]) {
+			location = waypoint[1];
+			break;
+		}
+	}
+	std::string cmd = prg + " " + location;
+	system(cmd.c_str());
+}
