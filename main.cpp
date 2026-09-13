@@ -20,20 +20,7 @@ int main(int argc, char* argv[]) {
 	std::string path = std::string(getenv("HOME")) + "/.waypoint/waypoint.txt";
 
 	if (arg == "jump") {
-		std::string location;
-		std::ifstream read(path);
-		std::string line;
-		std::vector<std::string> waypoint;
- 
-		while (getline(read, line)) { 
-			waypoint = splitWaypoint(line);
-			if (name == waypoint[0]) {
-				location = waypoint[1];
-				break;
-			}
-		}
-		location = trimLocation(location);
-		std::cout << location;
+		jump(path, name);
 	}
 	if (arg == "open") {	
 		std::string location;
@@ -52,10 +39,7 @@ int main(int argc, char* argv[]) {
 		system(cmd.c_str());
 	}
 	if (arg == "add" && argc == 4) {
-		std::string file = argv[3];
-		std::ofstream write(path, std::ios::app);
-		write << name << "|" << file << "|" << '\n';
-		write.close();
+		add(path, name, argv);
 	} else if (arg == "add") { throwError("add needs 3 arguments"); return 1;}
 	if (arg == "tag" && argc == 4) {				
 		tag(path, name, argv[3]);
@@ -70,8 +54,6 @@ int main(int argc, char* argv[]) {
 		remove(path, name);
 	}
 	if (arg == "init") {
-		std::filesystem::path dir = ".waypoint";
-		if (!std::filesystem::exists(dir)) { std::filesystem::create_directory(dir);}
-		else {std::cout << "Local Waypoint alredy exsists";}
+		init();
 	}
 }}

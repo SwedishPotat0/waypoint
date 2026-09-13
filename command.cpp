@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <filesystem>
 
 #include "command.h"
 #include "fileParsing.h"
@@ -94,4 +95,34 @@ void getPath(std::string path, std::string name) {
 		}
 	}
 	std::cout << location;
+}
+
+void init() {
+	std::filesystem::path dir = ".waypoint";
+	if (!std::filesystem::exists(dir)) { std::filesystem::create_directory(dir);}
+	else {std::cout << "Local Waypoint alredy exsists";}
+}
+
+void jump(std::string path, std::string name) {
+	std::string location;
+	std::ifstream read(path);
+	std::string line;
+	std::vector<std::string> waypoint;
+ 
+	while (getline(read, line)) { 
+		waypoint = splitWaypoint(line);
+		if (name == waypoint[0]) {
+			location = waypoint[1];
+			break;
+		}
+	}
+	location = trimLocation(location);
+	std::cout << location;
+}
+
+void add(std::string path, std::string name, char** argv) {
+	std::string file = argv[3];
+	std::ofstream write(path, std::ios::app);
+	write << name << "|" << file << "|" << '\n';
+	write.close();
 }
