@@ -8,6 +8,17 @@
 #include "fileParsing.h"
 #include "message.h"
 
+bool checkDublicate(std::string path, std::string name) {
+	std::string line;
+	std::fstream read(path);
+	std::vector<std::string> waypoint;
+	while(getline(read, line)) {
+		waypoint = splitWaypoint(line);
+		if (name == waypoint[0]) {return true;}
+	}
+	return false;
+}
+
 void tag(std::string path, std::string name, std::string tag) {
 	std::string line;
 	std::string row;
@@ -121,8 +132,11 @@ void jump(std::string path, std::string name) {
 }
 
 void add(std::string path, std::string name, char** argv) {
-	std::string file = argv[3];
-	std::ofstream write(path, std::ios::app);
-	write << name << "|" << file << "|" << '\n';
-	write.close();
+	if (checkDublicate(path, name)) {throwError("Waypoint whit name " + name + " alredy exsists");}
+	else {
+		std::string file = argv[3];
+		std::ofstream write(path, std::ios::app);
+		write << name << "|" << file << "|" << '\n';
+		write.close();
+	}
 }
