@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <filesystem>
+#include <iomanip>
 
 #include "command.h"
 #include "fileParsing.h"
@@ -50,20 +51,33 @@ int list(std::string path, std::string name, char** argv, int argc) {
 	std::string line;
 	std::vector<std::string> waypoint;
 	if (name == "all") {	
-		while (getline(read, line)) {std::cout << line << std::endl;}
+		std::cout << std::left << std::setw(20) << "Name" << std::setw(50) << "Path" << std::setw(20) << "Tag" << '\n';
+		std::cout << std::left << std::string(90, '-') << '\n';
+		while (getline(read, line)) {
+			waypoint = splitWaypoint(line);
+			std::cout << std::left << std::setw(20) << waypoint[0] << std::setw(50) << waypoint[1] << std::setw(20) << waypoint[2] << '\n';
+		}
 	} else if (name == "name") {
 		if (argc != 4) {throwError("Parameter NAME needs 3 arguments"); return 1;}
 		std::string search = argv[3];
+		std::cout << std::left << std::setw(20) << "Name" << std::setw(50) << "Path" << std::setw(20) << "Tag" << '\n';
+		std::cout << std::left << std::string(90, '-') << '\n';
 		while (getline(read, line)) {
 			waypoint = splitWaypoint(line);
-			if (search == waypoint[0]) {std::cout << line << std::endl;}
+			if (search == waypoint[0]) {
+				std::cout << std::left << std::setw(20) << waypoint[0] << std::setw(50) << waypoint[1] << std::setw(20) << waypoint[2] << '\n';
+			}
 		}
 	} else if (name == "tag") {
 		if (argc != 4) {throwError("Parameter TAG needs 3 arguments"); return 1;}
 		std::string search = argv[3];
+		std::cout << std::left << std::setw(20) << "Name" << std::setw(50) << "Path" << std::setw(20) << "Tag" << '\n';
+		std::cout << std::left << std::string(90, '-') << '\n';
 		while (getline(read, line)) {
 			waypoint = splitWaypoint(line);
-			if (search == waypoint[2]) {std::cout << line << std::endl;}
+			if (search == waypoint[2]) {
+				std::cout << std::left << std::setw(20) << waypoint[0] << std::setw(50) << waypoint[1] << std::setw(20) << waypoint[2] << '\n';
+			}
 		}
 	} else if (name == "group") {
 		if (argc != 4) {throwError("Parameter GROUP needs 3 arguments"); return 1;}
