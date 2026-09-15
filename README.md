@@ -4,11 +4,7 @@ Waypoint is a CLI tool for fast file navigation through bookmarks, tags & groups
 
 Have you ever forgotten where a file in your project is located? Then Waypoint could be for you, instead of having to remember file-paths you can instead open your files through memorable names.
 
-```bash
-waypoint add main ~/Documents/project1/main.cpp
-waypoint open main
-```
-This will add project1's main.cpp under the name main and then directly open it up by just using the name main.
+![](https://github.com/SwedishPotat0/waypoint/blob/main/waypoint.gif)
 
 ## Why use waypoint?
 So why use waypoint if you already use tools like fzf?
