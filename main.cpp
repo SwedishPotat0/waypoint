@@ -19,12 +19,14 @@ int main(int argc, char* argv[]) {
 	std::string prg = getEditor();
 	std::string path; if (checkLocal()) { path = ".waypoint/waypoint.txt"; } else { path = std::string(getenv("HOME")) + "/.waypoint/waypoint.txt"; } 
 	if (arg == "jump") { jump(path, name); }
-	if (arg == "open") { open(path, name, prg); }
-	if (arg == "add" && argc == 4) { add(path, name, argv); } else if (arg == "add") { throwError("add needs 3 arguments"); return 1;}
-	if (arg == "tag" && argc == 4) { tag(path, name, argv[3]); } else if (arg == "tag") { throwError("tag needs 3 arguments"); return 1;}
-	if (arg == "list") { return list(path, name, argv, argc); }
-	if (arg == "getPath") { getPath(path, name); }
-	if (arg == "remove") { remove(path, name); }
-	if (arg == "init") { init(); }
+	else if (arg == "open") { open(path, name, prg); }
+	else if (arg == "add" && argc == 4) { add(path, name, argv); } else if (arg == "add") { throwError("add needs 3 arguments"); return 1;}
+	else if (arg == "tag" && argc == 4) { tag(path, name, argv[3]); } else if (arg == "tag") { throwError("tag needs 3 arguments"); return 1;}
+	else if (arg == "list") { return list(path, name, argv, argc); }
+	else if (arg == "getPath") { getPath(path, name); }
+	else if (arg == "remove") { remove(path, name); }
+	else if (arg == "init") { init(); }
+	else if (arg == "help") { help(); }
+	else {throwError("'" + arg + "' is a unkown command, for seeing avalibale operations run 'help'");}
 	}
 }

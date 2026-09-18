@@ -176,3 +176,26 @@ void open(std::string path, std::string name, std::string prg) {
 		system(cmd.c_str());
 	} else { throwError("No waypoint named '" + name + "' found"); }
 }
+
+void help() {
+	std::vector<std::string> Help = {
+		"add - adds a waypoint",
+		"	waypoint add [name] [path]",
+		"open - opens a waypoint in the configured editor",
+		"	waypoint open [name]",
+		"tag - tags a waypoint",
+		"	waypoint tag [name] [tag]",
+		"remove - removes a waypoint",
+		"	waypoint remove [name]",
+		"list - lists waypoints based on the given argument",
+		"	waypoint list [arg] [serchterm]",
+		"	Accsepted arguments:",
+		"		all - needs no serch term",
+		"		name - serches the name of waypoints",
+		"		tag - serches the tag of waypoints",
+		"getPath - fetches the path for a waypoint"
+	};
+	
+
+	for (const auto& r : Help) { std::cout << r << '\n'; }
+}

@@ -110,6 +110,8 @@ Waypoint has a selection of simple commands, these are:
     waypoint init
     ```
 
+* Help - prints out explinations for waypoints commands
+
 <details>
 <summary>Planned Commands</summary>
 

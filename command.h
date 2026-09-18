@@ -11,5 +11,6 @@ void init();
 void jump(std::string path, std::string name);
 void add(std::string path, std::string name, char** argv);
 void open(std::string path, std::string name, std::string prg);
+void help();
 
 #endif
