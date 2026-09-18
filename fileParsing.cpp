@@ -77,3 +77,11 @@ std::string trimLocation(std::string location) {
 	for (const auto& p : path) {Location += p;}
 	return Location;
 }
+
+bool checkLocal() {
+	if (std::filesystem::is_directory(".waypoint")) {
+		return true;
+	} else {
+		return false;
+	}
+}
