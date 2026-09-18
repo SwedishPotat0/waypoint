@@ -112,7 +112,7 @@ void remove(std::string path, std::string name) {
 
 void getPath(std::string path, std::string name) {
 	std::string location;
-	std::string Path; if (checkLocal()) { Path = ".waypoint/waypoint.txt" } else { Path = path; }
+	std::string Path; if (checkLocal()) { Path = ".waypoint/waypoint.txt"; } else { Path = path; }
 	std::ifstream read(Path);
 	std::string line;
 	std::vector<std::string> waypoint;
