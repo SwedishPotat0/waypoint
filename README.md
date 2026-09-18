@@ -91,6 +91,13 @@ Waypoint has a selection of simple commands, these are:
     waypoint remove main
     ```
 
+* Init - Makes a local waypoint directory in your current directory allowing the use of local waypoints
+    
+    Example:
+    ```bash
+    waypoint init
+    ```
+
 <details>
 <summary>Planned Commands</summary>
 
@@ -127,4 +134,4 @@ Waypoint has a selection of simple commands, these are:
 
 - [x] Create Vim plugin - See [waypoint.vim](https://github.com/SwedishPotat0/waypoint.vim)
 
-- [ ] Add project specific waypoint files
+- [x] Add project specific waypoint files
