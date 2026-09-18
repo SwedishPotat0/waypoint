@@ -43,7 +43,7 @@ void tag(std::string path, std::string name, std::string tag) {
 	std::ofstream write(path);
 	for (const auto& r : rows) { write << r << '\n'; }
 	write.close();
-
+	throwSuccses("Tag '" + tag + "' added to waypoint '" + name + "'");
 }
 
 int list(std::string path, std::string name, char** argv, int argc) {
@@ -100,6 +100,7 @@ void remove(std::string path, std::string name) {
 			row.push_back(line);
 		}
 	}
+	throwSuccses("Waypoint '" + name + "' removed");
 	std::ofstream write(path);
 	for (const auto& r : row) { write << r << '\n'; }
 	write.close();
@@ -153,6 +154,7 @@ void add(std::string path, std::string name, char** argv) {
 		std::ofstream write(path, std::ios::app);
 		write << name << "|" << file << "|" << '\n';
 		write.close();
+		throwSuccses("Waypoint '" + name + "' added");
 	}
 }
 

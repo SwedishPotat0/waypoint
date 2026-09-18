@@ -1,4 +1,4 @@
-main|main.cpp|
+main|main.cpp|main
 command|command.cpp|
 commandH|command.h|
 fileH|fileParsing.h|
