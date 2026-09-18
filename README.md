@@ -114,6 +114,28 @@ Waypoint has a selection of simple commands, these are:
     ```bash
     waypoint jump main
     ```
+
+* Rename - Rename a waypoint
+
+    Example:
+    ```bash
+    waypoint rename oldname newname
+    ```
+
+* Untag - Removes one or all tags from a waypoint
+
+    Example:
+    ```bash
+    waypoint untag main
+    ```
+    Removes all tags from main
+        
+     Example:
+    ```bash
+    waypoint untag main important
+    ```
+    Removes the tag important from main
+
 </details>
 
 ## Roadmap
