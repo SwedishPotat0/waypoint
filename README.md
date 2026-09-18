@@ -47,6 +47,12 @@ After installing waypoint try to run `waypoint` in your terminal to allow it to 
 
 After first run you will find all default Waypoint files in `~/.waypoint`, you can modify these manually, but be sure to keep to the file-formatting that Waypoint has automatically made, otherwise it could break things.
 
+## Local waypoints
+
+There are two "types" of waypoints, local and global, global waypoints can be used nearly anywhere on your system, while local waypoints can only be accsesd in the directory where it exsists.
+
+To creat local waypoints you begin whit runing the `init` command to initilise a local waypoint directory, then you navigate these waypoints like the global ones.
+
 ## How to use Waypoint
 
 Waypoint has a selection of simple commands, these are:
