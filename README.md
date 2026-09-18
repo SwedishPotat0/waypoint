@@ -47,6 +47,12 @@ After installing waypoint try to run `waypoint` in your terminal to allow it to 
 
 After first run you will find all default Waypoint files in `~/.waypoint`, you can modify these manually, but be sure to keep to the file-formatting that Waypoint has automatically made, otherwise it could break things.
 
+## How to configure waypoint
+
+A config file for waypoint exsists in ~/.waypoint/config.txt
+
+Currently the only option to configure is what editor waypoint should open your files in, by default the editr will be set to vim.    
+
 ## Local waypoints
 
 There are two "types" of waypoints, local and global, global waypoints can be used nearly anywhere on your system, while local waypoints can only be accsesd in the directory where it exsists.
