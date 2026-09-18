@@ -11,7 +11,8 @@
 
 bool checkDublicate(std::string path, std::string name) {
 	std::string line;
-	std::fstream read(path);
+	std::string Path; if(checkLocal()) { Path = ".waypoint/waypoint.txt"; } else { Path = path; }
+	std::fstream read(Path);
 	std::vector<std::string> waypoint;
 	while(getline(read, line)) {
 		waypoint = splitWaypoint(line);
@@ -26,7 +27,8 @@ void tag(std::string path, std::string name, std::string tag) {
 	std::vector<std::string> rows;
 	std::vector<std::string> waypoint;
 	std::string location;
-	std::ifstream read(path);
+	std::string Path; if (checkLocal()) { Path = ".waypoint/waypoint.txt"; } else { Path = path; }
+	std::ifstream read(Path);
 
 	while (getline(read, line)) { 
 		std::string word = "";
@@ -47,7 +49,8 @@ void tag(std::string path, std::string name, std::string tag) {
 }
 
 int list(std::string path, std::string name, char** argv, int argc) {
-	std::ifstream read(path);
+	std::string Path; if(checkLocal()) { Path = ".waypoint/waypoint.txt"; } else { Path = path; }
+	std::ifstream read(Path);
 	std::string line;
 	std::vector<std::string> waypoint;
 	if (name == "all") {	
@@ -87,7 +90,8 @@ int list(std::string path, std::string name, char** argv, int argc) {
 }
 
 void remove(std::string path, std::string name) {
-	std::ifstream read(path);
+	std::string Path; if (checkLocal()) { Path = ".waypoint/waypoint.txt"; } else { Path = path; }
+	std::ifstream read(Path);
 	std::string line;
 	std::vector<std::string> waypoint;
 	std::vector<std::string> row;
@@ -108,7 +112,8 @@ void remove(std::string path, std::string name) {
 
 void getPath(std::string path, std::string name) {
 	std::string location;
-	std::ifstream read(path);
+	std::string Path; if (checkLocal()) { Path = ".waypoint/waypoint.txt" } else { Path = path; }
+	std::ifstream read(Path);
 	std::string line;
 	std::vector<std::string> waypoint;
 
@@ -148,8 +153,11 @@ void jump(std::string path, std::string name) {
 void add(std::string path, std::string name, char** argv) {
 	if (checkDublicate(path, name)) {throwError("Waypoint whit name " + name + " alredy exsists");}
 	else {
+		std::string Path;
+		if (!checkLocal()) { Path = path; } 
+		else { Path = ".waypoint/waypoint.txt"; }
 		std::string file = argv[3];
-		std::ofstream write(path, std::ios::app);
+		std::ofstream write(Path, std::ios::app);
 		write << name << "|" << file << "|" << '\n';
 		write.close();
 	}
@@ -157,10 +165,11 @@ void add(std::string path, std::string name, char** argv) {
 
 void open(std::string path, std::string name, std::string prg) {
 	std::string location;
-	std::ifstream read(path);
+	std::string Path; if(checkLocal()) { Path = ".waypoint/waypoint.txt"; } else { Path = path; }
+	std::ifstream read(Path);
 	std::string line;
 	std::vector<std::string> waypoint;
- 
+
 	while (getline(read, line)) { 
 		waypoint = splitWaypoint(line);
 		if (name == waypoint[0]) {
@@ -168,6 +177,8 @@ void open(std::string path, std::string name, std::string prg) {
 			break;
 		}
 	}
-	std::string cmd = prg + " " + location;
-	system(cmd.c_str());
+	if (!location.empty()) {
+		std::string cmd = prg + " " + location;
+		system(cmd.c_str());
+	} else { throwError("No waypoint named '" + name + "' found"); }
 }
