@@ -89,6 +89,14 @@ Waypoint has a selection of simple commands, these are:
     main ~/Documents/project1/main.cpp
     ```
 
+    **Accepted filters:**
+    
+    * all - list all waypoint
+    
+    * name - list all waypoints whit a matching name
+    
+    * tag - list all waypoints whit a matching tag
+
 * Tag - Tags a bookmark with the given tag
 
     Example:
