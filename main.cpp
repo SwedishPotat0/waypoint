@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
 	else if (arg == "remove") { remove(path, name); }
 	else if (arg == "init") { init(); }
 	else if (arg == "help") { help(); }
+	else if (arg == "untag") { if(argc == 3){ untag(path, name); } else if(argc == 4) { untag(path, name, argv[3]); } }
 	else {throwError("'" + arg + "' is a unkown command, for seeing avalibale operations run 'help'");}
 	}
 }

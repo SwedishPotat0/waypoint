@@ -210,3 +210,28 @@ void help() {
 
 	for (const auto& r : Help) { std::cout << r << '\n'; }
 }
+
+void untag(std::string path,std::string name, std::string tag) {
+	std::vector<std::vector<std::string>> waypoint;
+	std::ifstream read(path);
+	std::string line;
+	std::vector<std::string> rows;
+	std::string row;
+
+	while(getline(read, line)) {
+		waypoint = splitWaypoint(line);
+
+		if (waypoint[0][0] == name) {
+			row = waypoint[0][0] + "|" + waypoint[1][0] + "|";
+			if (tag != "") {
+				if (!waypoint[2].empty()) { for (const auto& t : waypoint[2]) { if (t != tag) {  row += t; row += "|"; }}}	
+			}
+		       rows.push_back(row);
+		}
+		else { rows.push_back(line); } 
+	}
+	std::ofstream write(path);
+	for (const auto& r : rows) { write << r << '\n'; }
+	write.close();
+
+}
