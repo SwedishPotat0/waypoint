@@ -9,13 +9,24 @@
 #include "fileParsing.h"
 #include "message.h"
 
+std::string writeTags (std::vector<std::string> tags) {
+	std::string output;
+	for (const auto& t : tags) { output += t; output += " ";}
+	return output;
+}
+
+bool matchTags(std::string tag, std::vector<std::string> tags) {
+	for (const auto& t : tags) { if(tag == t) { return true; } }
+	return false;
+}
+
 bool checkDublicate(std::string path, std::string name) {
 	std::string line;
 	std::fstream read(path);
-	std::vector<std::string> waypoint;
+	std::vector<std::vector<std::string>> waypoint;
 	while(getline(read, line)) {
 		waypoint = splitWaypoint(line);
-		if (name == waypoint[0]) {return true;}
+		if (name == waypoint[0][0]) {return true;}
 	}
 	return false;
 }
@@ -24,7 +35,7 @@ void tag(std::string path, std::string name, std::string tag) {
 	std::string line;
 	std::string row;
 	std::vector<std::string> rows;
-	std::vector<std::string> waypoint;
+	std::vector<std::vector<std::string>> waypoint;
 	std::string location;
 	std::ifstream read(path);
 
@@ -33,11 +44,11 @@ void tag(std::string path, std::string name, std::string tag) {
 		bool nameTrue = false;
 		row = "";
 		waypoint = splitWaypoint(line);
-		if (name == waypoint[0]) {
+		if (name == waypoint[0][0]) {
 			nameTrue = true;
-			row += waypoint[0]; row += '|'; 
-			row += waypoint[1]; row += '|';
-			if (waypoint[2] != "") { row += waypoint[2]; row += '|';}
+			row += waypoint[0][0]; row += '|'; 
+			row += waypoint[1][0]; row += '|';
+			if (!waypoint[2].empty()) { for (const auto& t : waypoint[2]) { row += t; row += "|"; }}
 		}
 		if(nameTrue){row += tag; rows.push_back(row);}else{rows.push_back(line);}}
 	std::ofstream write(path);
@@ -49,13 +60,13 @@ void tag(std::string path, std::string name, std::string tag) {
 int list(std::string path, std::string name, char** argv, int argc) {
 	std::ifstream read(path);
 	std::string line;
-	std::vector<std::string> waypoint;
+	std::vector<std::vector<std::string>> waypoint;
 	if (name == "all") {	
 		std::cout << std::left << std::setw(20) << "Name" << std::setw(50) << "Path" << std::setw(20) << "Tag" << '\n';
 		std::cout << std::left << std::string(90, '-') << '\n';
 		while (getline(read, line)) {
 			waypoint = splitWaypoint(line);
-			std::cout << std::left << std::setw(20) << waypoint[0] << std::setw(50) << waypoint[1] << std::setw(20) << waypoint[2] << '\n';
+			std::cout << std::left << std::setw(20) << waypoint[0][0] << std::setw(50) << waypoint[1][0] << std::setw(20) << writeTags(waypoint[2]) << '\n';
 		}
 	} else if (name == "name") {
 		if (argc != 4) {throwError("Parameter NAME needs 3 arguments"); return 1;}
@@ -64,8 +75,8 @@ int list(std::string path, std::string name, char** argv, int argc) {
 		std::cout << std::left << std::string(90, '-') << '\n';
 		while (getline(read, line)) {
 			waypoint = splitWaypoint(line);
-			if (search == waypoint[0]) {
-				std::cout << std::left << std::setw(20) << waypoint[0] << std::setw(50) << waypoint[1] << std::setw(20) << waypoint[2] << '\n';
+			if (search == waypoint[0][0]) {
+				std::cout << std::left << std::setw(20) << waypoint[0][0] << std::setw(50) << waypoint[1][0] << std::setw(20) << writeTags(waypoint[2]) << '\n';
 			}
 		}
 	} else if (name == "tag") {
@@ -75,8 +86,8 @@ int list(std::string path, std::string name, char** argv, int argc) {
 		std::cout << std::left << std::string(90, '-') << '\n';
 		while (getline(read, line)) {
 			waypoint = splitWaypoint(line);
-			if (search == waypoint[2]) {
-				std::cout << std::left << std::setw(20) << waypoint[0] << std::setw(50) << waypoint[1] << std::setw(20) << waypoint[2] << '\n';
+			if (matchTags(search, waypoint[2])) {
+				std::cout << std::left << std::setw(20) << waypoint[0][0] << std::setw(50) << waypoint[1][0] << std::setw(20) << writeTags(waypoint[2]) << '\n';
 			}
 		}
 	} else if (name == "group") {
@@ -89,12 +100,12 @@ int list(std::string path, std::string name, char** argv, int argc) {
 void remove(std::string path, std::string name) {
 	std::ifstream read(path);
 	std::string line;
-	std::vector<std::string> waypoint;
+	std::vector<std::vector<std::string>> waypoint;
 	std::vector<std::string> row;
  
 	while (getline(read, line)) { 
 		waypoint = splitWaypoint(line);
-		if (name == waypoint[0]) {
+		if (name == waypoint[0][0]) {
 			continue;
 		} else {
 			row.push_back(line);
@@ -111,12 +122,12 @@ void getPath(std::string path, std::string name) {
 	std::string location;
 	std::ifstream read(path);
 	std::string line;
-	std::vector<std::string> waypoint;
+	std::vector<std::vector<std::string>> waypoint;
 
 	while (getline(read, line)) { 
 		waypoint = splitWaypoint(line);
-		if (name == waypoint[0]) {
-			location = waypoint[1];
+		if (name == waypoint[0][0]) {
+			location = waypoint[1][0];
 			break;
 		}
 	}
@@ -133,12 +144,12 @@ void jump(std::string path, std::string name) {
 	std::string location;
 	std::ifstream read(path);
 	std::string line;
-	std::vector<std::string> waypoint;
+	std::vector<std::vector<std::string>> waypoint;
  
 	while (getline(read, line)) { 
 		waypoint = splitWaypoint(line);
-		if (name == waypoint[0]) {
-			location = waypoint[1];
+		if (name == waypoint[0][0]) {
+			location = waypoint[1][0];
 			break;
 		}
 	}
@@ -162,12 +173,12 @@ void open(std::string path, std::string name, std::string prg) {
 	std::string location;
 	std::ifstream read(path);
 	std::string line;
-	std::vector<std::string> waypoint;
+	std::vector<std::vector<std::string>> waypoint;
 
 	while (getline(read, line)) { 
 		waypoint = splitWaypoint(line);
-		if (name == waypoint[0]) {
-			location = waypoint[1];
+		if (name == waypoint[0][0]) {
+			location = waypoint[1][0];
 			break;
 		}
 	}

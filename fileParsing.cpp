@@ -19,23 +19,25 @@ bool checkDir() {
 
 
 
-std::vector<std::string> splitWaypoint(std::string waypoint) {
+std::vector<std::vector<std::string>> splitWaypoint(std::string waypoint) {
 	std::string name = ""; std::string location = ""; std::string tag = "";	
 	bool nameC = false; bool locationC = false; bool tagC = false;
-	std::vector<std::string> Waypoint;
+	std::vector<std::string> tags; std::vector<std::vector<std::string>> Waypoint; 	
 	for (size_t i = 0; i < waypoint.length(); i++) {
 		if (waypoint[i] == '|') {
 			if (name != "") {nameC = true;}
 			if (location != "") {locationC = true;}
+			if (tag != "") {tags.push_back(tag); tag = "";}
 			continue;
 		}
 		if (locationC) {tag += waypoint[i];}
 		else if (nameC) {location += waypoint[i];}	
 		else {name += waypoint[i];}
 	}
-	Waypoint.push_back(name);
-	Waypoint.push_back(location);
-	Waypoint.push_back(tag);
+	if(tag != "") { tags.push_back(tag); }
+	Waypoint.push_back({name});
+	Waypoint.push_back({location});
+	Waypoint.push_back(tags);
 
 	return Waypoint;
 }
