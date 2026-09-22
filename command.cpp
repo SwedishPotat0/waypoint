@@ -235,3 +235,9 @@ void untag(std::string path,std::string name, std::string tag) {
 	write.close();
 
 }
+
+void link(std::string name, std::string location) {
+	std::ofstream write(std::string(getenv("HOME")) + "/.waypoint/link.txt");
+	write << name + "|" << location << "|" << '\n';
+	write.close();
+}
