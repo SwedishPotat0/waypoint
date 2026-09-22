@@ -158,6 +158,13 @@ Waypoint has a selection of simple commands, these are:
     waypoint rename oldname newname
     ```
 
+* Link - Links a project local waypoint directory to your global waypoints
+
+    Example:
+    ```bash
+    waypoint link project path
+    ```
+
 </details>
 
 ## Roadmap
