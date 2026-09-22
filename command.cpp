@@ -241,3 +241,27 @@ void link(std::string name, std::string location) {
 	write << name + "|" << location << "|" << '\n';
 	write.close();
 }
+
+void rename(std::string path, std::string name, std::string newName) {
+	std::ifstream read(path);
+	std::vector<std::vector<std::string>> waypoint;
+	std::string line;
+	std::string row;
+	std::vector<std::string> rows;
+
+	while(getline(read, line)) {
+		waypoint = splitWaypoint(line);
+		row = "";
+		if (name == waypoint[0][0]) {
+			row += newName; row += "|";
+			row += waypoint[1][0]; row += "|";
+			if (!waypoint[2].empty()) { for(const auto& tag : waypoint[2]) { row += tag; row += "|"; } }
+			rows.push_back(row);
+		}
+		else { rows.push_back(line); }
+	}
+	std::ofstream write (path);
+	for (const auto& r : rows) { write << r << '\n'; }
+	write.close();
+	throwSuccses("Renamed " + name + "succsesfully to " + newName);
+}

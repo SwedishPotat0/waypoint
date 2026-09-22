@@ -14,5 +14,6 @@ void open(std::string path, std::string name, std::string prg);
 void help();
 void untag(std::string path,std::string name, std::string tag = "");
 void link(std::string name, std::string location);
+void rename(std::string path, std::string name, std::string newName);
 
 #endif
