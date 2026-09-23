@@ -134,6 +134,13 @@ Waypoint has a selection of simple commands, these are:
     ```
     Removes the tag important from main
 
+* Rename - Rename a waypoint
+
+    Example:
+    ```bash
+    waypoint rename oldname newname
+    ```
+
 <details>
 <summary>Planned Commands</summary>
 
@@ -149,13 +156,6 @@ Waypoint has a selection of simple commands, these are:
     Example:
     ```bash
     waypoint jump main
-    ```
-
-* Rename - Rename a waypoint
-
-    Example:
-    ```bash
-    waypoint rename oldname newname
     ```
 
 * Link - Links a project local waypoint directory to your global waypoints
