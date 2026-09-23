@@ -17,7 +17,8 @@ int main(int argc, char* argv[]) {
 	std::string arg = argv[1];
 	std::string name; if (argc > 2) {name = argv[2];} else {name = "";}
 	std::string prg = getEditor();
-	std::string path; if (checkLocal()) { path = ".waypoint/waypoint.txt"; } else { path = std::string(getenv("HOME")) + "/.waypoint/waypoint.txt"; } 
+	bool linked = checkLink(name);
+	std::string path; if (checkLocal()) { path = ".waypoint/waypoint.txt"; } else { if (linked) { path = std::string(getenv("HOME")) + "/.waypoint/link.txt"; } else { path = std::string(getenv("HOME")) + "/.waypoint/waypoint.txt"; } } 
 	if (arg == "jump") { jump(path, name); }
 	else if (arg == "open") { open(path, name, prg); }
 	else if (arg == "add" && argc == 4) { add(path, name, argv); } else if (arg == "add") { throwError("add needs 3 arguments"); return 1;}

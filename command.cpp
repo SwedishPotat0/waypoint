@@ -31,6 +31,15 @@ bool checkDublicate(std::string path, std::string name) {
 	return false;
 }
 
+bool checkLink(std::string name) {
+	for (int i = 0; i < name.length(); i++) {
+		if (name[i] == ':') {
+			return true;
+		}
+	}
+	return false;
+}
+
 void tag(std::string path, std::string name, std::string tag) {
 	std::string line;
 	std::string row;
@@ -174,7 +183,10 @@ void open(std::string path, std::string name, std::string prg) {
 	std::ifstream read(path);
 	std::string line;
 	std::vector<std::vector<std::string>> waypoint;
+	bool link = checkLink(name);
 
+
+	if (link) { std::string nameTEMP; for (int i = 0; i < name.length(); i++) { if (name[i] == ':') { break; } nameTEMP += name[i]; } name = nameTEMP; }
 	while (getline(read, line)) { 
 		waypoint = splitWaypoint(line);
 		if (name == waypoint[0][0]) {
