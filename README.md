@@ -182,7 +182,10 @@ Waypoint has a selection of simple commands, these are:
 - [ ] Make list function for names/tags/groups that contain the filter term and not just a exact match
 
 - [x] Add waypoint config file
+    - [ ] Expand configuration options
 
 - [x] Create Vim plugin - See [waypoint.vim](https://github.com/SwedishPotat0/waypoint.vim)
 
 - [x] Add project specific waypoint files
+    - [ ] Make it possibale to link local waypoints to global waypoints for easier accses
+    - [ ] Make it possibale to accses global waypoints when in a directory whit local waypoints
