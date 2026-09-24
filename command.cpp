@@ -216,7 +216,13 @@ void help() {
 		"		all - needs no serch term",
 		"		name - serches the name of waypoints",
 		"		tag - serches the tag of waypoints",
-		"getPath - fetches the path for a waypoint"
+		"getPath - fetches the path for a waypoint",
+		"init - initilise a local waypoint in the current directory",
+		"untag - removes one or all tags from a waypoint",
+		"	waypoint untag [name]",
+		"		remoives all tags",
+		"	waypoint untag [name] [tag]",
+		"		removies the specified tag"
 	};
 	
 
