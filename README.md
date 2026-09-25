@@ -59,6 +59,10 @@ There are two "types" of waypoints, local and global, global waypoints can be us
 
 To creat local waypoints you begin whit runing the `init` command to initilise a local waypoint directory, then you navigate these waypoints like the global ones.
 
+### Linking local waypoints
+
+Thru the `link` command can you link a repo where you have local waypoints whit the command `waypoint link project path` and then accses them anywhere whit `waypoint open project:file`
+
 ## How to use Waypoint
 
 Waypoint has a selection of simple commands, these are:
