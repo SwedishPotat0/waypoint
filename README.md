@@ -141,6 +141,13 @@ Waypoint has a selection of simple commands, these are:
     waypoint rename oldname newname
     ```
 
+* Link - Links a project local waypoint directory to your global waypoints
+
+    Example:
+    ```bash
+    waypoint link project path
+    ```
+
 <details>
 <summary>Planned Commands</summary>
 
@@ -156,13 +163,6 @@ Waypoint has a selection of simple commands, these are:
     Example:
     ```bash
     waypoint jump main
-    ```
-
-* Link - Links a project local waypoint directory to your global waypoints
-
-    Example:
-    ```bash
-    waypoint link project path
     ```
 
 </details>

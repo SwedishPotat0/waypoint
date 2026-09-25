@@ -143,6 +143,23 @@ void getPath(std::string path, std::string name) {
 	std::cout << location;
 }
 
+std::string Path(std::string path, std::string name) {
+	std::string location;
+	std::ifstream read(path);
+	std::string line;
+	std::vector<std::vector<std::string>> waypoint;
+
+	while (getline(read, line)) { 
+		waypoint = splitWaypoint(line);
+		if (name == waypoint[0][0]) {
+			location = waypoint[1][0];
+			break;
+		}
+	}
+	return location;
+}
+
+
 void init() {
 	std::filesystem::path dir = ".waypoint";
 	if (!std::filesystem::exists(dir)) { std::filesystem::create_directory(dir);}
@@ -184,13 +201,14 @@ void open(std::string path, std::string name, std::string prg) {
 	std::string line;
 	std::vector<std::vector<std::string>> waypoint;
 	bool link = checkLink(name);
+	std::string nameT;
 
-
-	if (link) { std::string nameTEMP; for (int i = 0; i < name.length(); i++) { if (name[i] == ':') { break; } nameTEMP += name[i]; } name = nameTEMP; }
+	if (link) { std::string nameTEMP; bool linkFound = false; for (int i = 0; i < name.length(); i++) { if (name[i] == ':') { linkFound = true; continue; } if (linkFound) { nameT += name[i]; continue; } nameTEMP += name[i]; } name = nameTEMP; }
 	while (getline(read, line)) { 
 		waypoint = splitWaypoint(line);
 		if (name == waypoint[0][0]) {
 			location = waypoint[1][0];
+			if (link) { location += "/" + Path(location + "/.waypoint/waypoint.txt", nameT); }
 			break;
 		}
 	}
@@ -255,7 +273,7 @@ void untag(std::string path,std::string name, std::string tag) {
 }
 
 void link(std::string name, std::string location) {
-	std::ofstream write(std::string(getenv("HOME")) + "/.waypoint/link.txt");
+	std::ofstream write(std::string(getenv("HOME")) + "/.waypoint/link.txt", std::ios::app);
 	write << name + "|" << location << "|" << '\n';
 	write.close();
 }
