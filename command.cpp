@@ -127,22 +127,6 @@ void remove(std::string path, std::string name) {
 
 }
 
-void getPath(std::string path, std::string name) {
-	std::string location;
-	std::ifstream read(path);
-	std::string line;
-	std::vector<std::vector<std::string>> waypoint;
-
-	while (getline(read, line)) { 
-		waypoint = splitWaypoint(line);
-		if (name == waypoint[0][0]) {
-			location = waypoint[1][0];
-			break;
-		}
-	}
-	std::cout << location;
-}
-
 std::string Path(std::string path, std::string name) {
 	std::string location;
 	std::ifstream read(path);
@@ -159,6 +143,26 @@ std::string Path(std::string path, std::string name) {
 	return location;
 }
 
+void getPath(std::string path, std::string name) {
+	std::string location;
+	std::ifstream read(path);
+	std::string line;
+	std::vector<std::vector<std::string>> waypoint;
+	bool link = checkLink(name);
+	std::string nameT;
+
+	if (link) { std::string nameTEMP; bool linkFound = false; for (int i = 0; i < name.length(); i++) { if (name[i] == ':') { linkFound = true; continue; } if (linkFound) { nameT += name[i]; continue; } nameTEMP += name[i]; } name = nameTEMP; }
+
+	while (getline(read, line)) { 
+		waypoint = splitWaypoint(line);
+		if (name == waypoint[0][0]) {
+			location = waypoint[1][0];
+			if (link) { location += "/" + Path(location + "/.waypoint/waypoint.txt", nameT); }
+			break;
+		}
+	}
+	std::cout << location;
+}
 
 void init() {
 	std::filesystem::path dir = ".waypoint";
