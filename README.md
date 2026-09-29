@@ -195,5 +195,5 @@ Waypoint has a selection of simple commands, these are:
 - [x] Create Vim plugin - See [waypoint.vim](https://github.com/SwedishPotat0/waypoint.vim)
 
 - [x] Add project specific waypoint files
-    - [ ] Make it possibale to link local waypoints to global waypoints for easier accses
+    - [x] Make it possibale to link local waypoints to global waypoints for easier accses
     - [ ] Make it possibale to accses global waypoints when in a directory whit local waypoints
