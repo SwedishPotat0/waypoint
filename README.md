@@ -61,7 +61,9 @@ To creat local waypoints you begin whit runing the `init` command to initilise a
 
 ### Linking local waypoints
 
-Thru the `link` command can you link a repo where you have local waypoints whit the command `waypoint link project path` and then accses them anywhere whit `waypoint open project:file`
+Thru the `link` command can you link a directory where you have local waypoints whit the command `waypoint link project path` and then accses them anywhere whit `waypoint open project:file`
+
+**Note: Waypoint does not currently check if a directory you link to have local waypoints**
 
 ## How to use Waypoint
 
