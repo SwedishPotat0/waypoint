@@ -101,6 +101,8 @@ Waypoint has a selection of simple commands, these are:
     
     * tag - list all waypoints whit a matching tag
 
+    * linked - list all linked directories
+
 * Tag - Tags a bookmark with the given tag
 
     Example:

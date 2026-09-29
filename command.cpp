@@ -67,10 +67,11 @@ void tag(std::string path, std::string name, std::string tag) {
 }
 
 int list(std::string path, std::string name, char** argv, int argc) {
+	if (name == "linked") { path = std::string(getenv("HOME")) + "/.waypoint/link.txt"; }
 	std::ifstream read(path);
 	std::string line;
 	std::vector<std::vector<std::string>> waypoint;
-	if (name == "all") {	
+	if (name == "all" || name == "linked") {	
 		std::cout << std::left << std::setw(20) << "Name" << std::setw(50) << "Path" << std::setw(20) << "Tag" << '\n';
 		std::cout << std::left << std::string(90, '-') << '\n';
 		while (getline(read, line)) {
