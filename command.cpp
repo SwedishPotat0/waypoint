@@ -165,6 +165,23 @@ void getPath(std::string path, std::string name) {
 	std::cout << location;
 }
 
+void getLinked (std::string name) {
+	std::string location;
+	std::ifstream read(std::string(getenv("HOME")) + "/.waypoint/link.txt");
+	std::string line;
+	std::vector<std::vector<std::string>> waypoint;
+
+	while (getline(read, line)) { 
+		waypoint = splitWaypoint(line);
+		if (name == waypoint[0][0]) {
+			location = waypoint[1][0];
+			break;
+		}
+	}
+	std::cout << location;
+
+}
+
 void init() {
 	std::filesystem::path dir = ".waypoint";
 	if (!std::filesystem::exists(dir)) { std::filesystem::create_directory(dir);}
