@@ -11,7 +11,7 @@
 
 int main(int argc, char* argv[]) {
 	bool dir = checkDir();
-	if (dir) { throwSuccses("Succseded to creat directory & config file"); return 0;}
+	if (dir) { throwSuccses("Succseded to creat directory & config file");}
 	else if (!dir) { if (argc < 2) { throwError("It needs to be atleast 1 arguments"); return 1;}
 		 
 	std::string arg = argv[1];
