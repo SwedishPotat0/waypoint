@@ -257,6 +257,7 @@ void help() {
 		"		name - serches the name of waypoints",
 		"		tag - serches the tag of waypoints",
 		"getPath - fetches the path for a waypoint",
+		"getLinked - fetches the oath for a linked directory",
 		"init - initilise a local waypoint in the current directory",
 		"untag - removes one or all tags from a waypoint",
 		"	waypoint untag [name]",
