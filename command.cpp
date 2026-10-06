@@ -240,6 +240,7 @@ void open(std::string path, std::string name, std::string prg) {
 	std::vector<std::string> allPaths;
 
 	if (link) { std::string nameTEMP; bool linkFound = false; for (int i = 0; i < name.length(); i++) { if (name[i] == ':') { linkFound = true; continue; } if (linkFound) { nameT += name[i]; continue; } nameTEMP += name[i]; } name = nameTEMP; }
+	if (name == "global") { name = nameT; read.close(); read.open(std::string(getenv("HOME")) + "/.waypoint/waypoint.txt"); link = false; }
 	while (getline(read, line)) { 
 		waypoint = splitWaypoint(line);
 		if (name == waypoint[0][0]) {

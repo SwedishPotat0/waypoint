@@ -198,7 +198,7 @@ Waypoint has a selection of simple commands, these are:
 
 - [x] Add project specific waypoint files
     - [x] Make it possibale to link local waypoints to global waypoints for easier accses
-    - [ ] Make it possibale to accses global waypoints when in a directory whit local waypoints
+    - [x] Make it possibale to accses global waypoints when in a directory whit local waypoints
 
 - [ ] Add check for link command to check if there is a local waypoint directory
 
