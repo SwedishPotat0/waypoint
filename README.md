@@ -199,3 +199,5 @@ Waypoint has a selection of simple commands, these are:
     - [ ] Make it possibale to accses global waypoints when in a directory whit local waypoints
 
 - [ ] Add check for link command to check if there is a local waypoint directory
+
+- [ ] Add ability to open all in a linked directory
