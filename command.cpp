@@ -188,9 +188,9 @@ void init() {
 	else {std::cout << "Local Waypoint alredy exsists";}
 }
 
-void jump(std::string path, std::string name) {
+void jump(std::string name) {
 	std::string location;
-	std::ifstream read(path);
+	std::ifstream read(std::string(getenv("HOME")) + "/.waypoint/link.txt");
 	std::string line;
 	std::vector<std::vector<std::string>> waypoint;
  
@@ -201,7 +201,7 @@ void jump(std::string path, std::string name) {
 			break;
 		}
 	}
-	location = trimLocation(location);
+
 	std::cout << location;
 }
 

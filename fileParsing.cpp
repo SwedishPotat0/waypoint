@@ -13,11 +13,9 @@ void makeConfig() {
 
 bool checkDir() {
 	std::filesystem::path dir = std::string(getenv("HOME")) + "/.waypoint";
-	if (!std::filesystem::exists(dir)) { std::filesystem::create_directory(dir); makeConfig();  return true;}
+	if (!std::filesystem::exists(dir)) { std::filesystem::create_directory(dir); makeConfig(); return true;}
 	return false;
 }
-
-
 
 std::vector<std::vector<std::string>> splitWaypoint(std::string waypoint) {
 	std::string name = ""; std::string location = ""; std::string tag = "";	
@@ -60,24 +58,6 @@ std::string getEditor() {
 		if (!editor.empty()) {break;}
 	}
 	return editor;
-}
-
-std::string trimLocation(std::string location) {
-	std::vector<std::string> path;
-	std::string temp = "";
-	std::string Location;
-	for (size_t i = 0; i < location.length(); i++) {
-		if (location[i] == '/') {
-			if (temp != "") {
-				path.push_back(temp+"/");
-				temp = "";
-				continue;
-			}
-		}
-		temp += location[i];
-	}	
-	for (const auto& p : path) {Location += p;}
-	return Location;
 }
 
 bool checkLocal() {

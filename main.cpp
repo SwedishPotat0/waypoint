@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 	std::string prg = getEditor();
 	bool linked = checkLink(name);
 	std::string path; if (checkLocal() && !linked) { path = ".waypoint/waypoint.txt"; } else { if (linked) { path = std::string(getenv("HOME")) + "/.waypoint/link.txt"; } else { path = std::string(getenv("HOME")) + "/.waypoint/waypoint.txt"; } } 
-	if (arg == "jump") { jump(path, name); }
+	if (arg == "jump") { jump(name); }
 	else if (arg == "open") { open(path, name, prg); }
 	else if (arg == "add" && argc == 4) { add(path, name, argv); } else if (arg == "add") { throwError("add needs 3 arguments"); return 1;}
 	else if (arg == "tag" && argc == 4) { tag(path, name, argv[3]); } else if (arg == "tag") { throwError("tag needs 3 arguments"); return 1;}
