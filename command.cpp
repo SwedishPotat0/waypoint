@@ -217,6 +217,19 @@ void add(std::string path, std::string name, char** argv) {
 	}
 }
 
+std::vector<std::string> getAllLinked(std::string location) {
+	std::ifstream read(location);
+	std::string line;
+	std::vector<std::vector<std::string>> waypoint;
+	std::vector<std::string> paths;
+
+	while (getline(read, line)) {
+		waypoint = splitWaypoint(line);
+		paths.push_back(waypoint[1][0]);
+	}
+	return paths;
+}
+
 void open(std::string path, std::string name, std::string prg) {
 	std::string location;
 	std::ifstream read(path);
@@ -224,19 +237,31 @@ void open(std::string path, std::string name, std::string prg) {
 	std::vector<std::vector<std::string>> waypoint;
 	bool link = checkLink(name);
 	std::string nameT;
+	std::vector<std::string> allPaths;
 
 	if (link) { std::string nameTEMP; bool linkFound = false; for (int i = 0; i < name.length(); i++) { if (name[i] == ':') { linkFound = true; continue; } if (linkFound) { nameT += name[i]; continue; } nameTEMP += name[i]; } name = nameTEMP; }
 	while (getline(read, line)) { 
 		waypoint = splitWaypoint(line);
 		if (name == waypoint[0][0]) {
 			location = waypoint[1][0];
+			if (link) { if (nameT == "all") { allPaths = getAllLinked(location + "/.waypoint/waypoint.txt"); } }
 			if (link) { location += "/" + Path(location + "/.waypoint/waypoint.txt", nameT); }
 			break;
 		}
 	}
 	if (!location.empty()) {
+		if (nameT == "all") {
+			if (!allPaths.empty()) {
+				std::string home = location;
+				location = "";
+				for (const auto& l : allPaths) {
+					location += home + l + " ";
+				}
+			}
+		}
 		std::string cmd = prg + " " + location;
 		system(cmd.c_str());
+
 	} else { throwError("No waypoint named '" + name + "' found"); }
 }
 

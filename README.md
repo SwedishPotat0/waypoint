@@ -1,5 +1,7 @@
 # Waypoint
 
+**Note that all testing happens whit vim as the configured editor to open up files in**
+
 Waypoint is a CLI tool for fast file navigation through bookmarks, tags & groups in a terminal centric workflow.
 
 Have you ever forgotten where a file in your project is located? Then Waypoint could be for you, instead of having to remember file-paths you can instead open your files through memorable names.
@@ -61,7 +63,7 @@ To creat local waypoints you begin whit runing the `init` command to initilise a
 
 ### Linking local waypoints
 
-Thru the `link` command can you link a directory where you have local waypoints whit the command `waypoint link project path` and then accses them anywhere whit `waypoint open project:file`
+Thru the `link` command can you link a directory where you have local waypoints whit the command `waypoint link project path` and then accses them anywhere whit `waypoint open project:file` or if you want to open all files you can use `waypoint open project:all` 
 
 **Note: Waypoint does not currently check if a directory you link to have local waypoints**
 
@@ -200,4 +202,4 @@ Waypoint has a selection of simple commands, these are:
 
 - [ ] Add check for link command to check if there is a local waypoint directory
 
-- [ ] Add ability to open all in a linked directory
+- [x] Add ability to open all in a linked directory
