@@ -245,7 +245,7 @@ void open(std::string path, std::string name, std::string prg) {
 		waypoint = splitWaypoint(line);
 		if (name == waypoint[0][0]) {
 			location = waypoint[1][0];
-			if (link) { if (nameT == "all") { allPaths = getAllLinked(location + "/.waypoint/waypoint.txt"); } }
+			if (link) { if (nameT == "all") { allPaths = getAllLinked(location + "/.waypoint/waypoint.txt"); break; } }
 			if (link) { location += "/" + Path(location + "/.waypoint/waypoint.txt", nameT); }
 			break;
 		}
@@ -256,7 +256,7 @@ void open(std::string path, std::string name, std::string prg) {
 				std::string home = location;
 				location = "";
 				for (const auto& l : allPaths) {
-					location += home + l + " ";
+					location += home + "/" + l + " ";
 				}
 			}
 		}
