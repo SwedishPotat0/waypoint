@@ -203,3 +203,5 @@ Waypoint has a selection of simple commands, these are:
 - [ ] Add check for link command to check if there is a local waypoint directory
 
 - [x] Add ability to open all in a linked directory
+
+- [ ] Make it possibale to have colored tags / waypoints
