@@ -322,9 +322,11 @@ void untag(std::string path,std::string name, std::string tag) {
 }
 
 void link(std::string name, std::string location) {
-	std::ofstream write(std::string(getenv("HOME")) + "/.waypoint/link.txt", std::ios::app);
-	write << name + "|" << location << "|" << '\n';
-	write.close();
+	if (std::filesystem::exists(location+"/.waypoint/")) {
+		std::ofstream write(std::string(getenv("HOME")) + "/.waypoint/link.txt", std::ios::app);
+		write << name + "|" << location << "|" << '\n';
+		write.close();
+	} else { throwError("No local waypoints found at: " + location); }
 }
 
 void rename(std::string path, std::string name, std::string newName) {

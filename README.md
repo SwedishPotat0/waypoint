@@ -213,7 +213,7 @@ Waypoint has a selection of simple commands, these are:
     - [x] Make it possibale to link local waypoints to global waypoints for easier accses
     - [x] Make it possibale to accses global waypoints when in a directory whit local waypoints
 
-- [ ] Add check for link command to check if there is a local waypoint directory
+- [x] Add check for link command to check if there is a local waypoint directory
 
 - [x] Add ability to open all in a linked directory
 
