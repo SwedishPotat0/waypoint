@@ -67,6 +67,19 @@ Thru the `link` command can you link a directory where you have local waypoints 
 
 **Note: Waypoint does not currently check if a directory you link to have local waypoints**
 
+## Coloerd tags
+
+You can have colord tags by having a colors.txt in the .waypoint/ directory and follow the format [tagname]=[color]
+The currenty supported colors are:
+
+* red
+
+* yellow
+
+* green
+
+* blue
+
 ## How to use Waypoint
 
 Waypoint has a selection of simple commands, these are:
@@ -204,4 +217,4 @@ Waypoint has a selection of simple commands, these are:
 
 - [x] Add ability to open all in a linked directory
 
-- [ ] Make it possibale to have colored tags / waypoints
+- [x] Make it possibale to have colored tags / waypoints
