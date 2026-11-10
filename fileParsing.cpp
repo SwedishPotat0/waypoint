@@ -4,6 +4,7 @@
 #include <fstream>
 
 #include "fileParsing.h"
+#include "color.h"
 
 void makeConfig() {
 	std::ofstream write(std::string(getenv("HOME")) + "/.waypoint/config.txt", std::ios::app);
@@ -65,5 +66,35 @@ bool checkLocal() {
 		return true;
 	} else {
 		return false;
+	}
+}
+
+const char* getColor(const std::string TAG) {
+	if (TAG == "RESET") { return colors[RESET]; }
+	std::string path; if (checkLocal()) { path = ".waypoint/colors.txt";} else { path = std::string(getenv("HOME")) + "/.waypoint/colors.txt";}
+	if (!std::filesystem::exists(path)) { return colors[RESET]; }
+	else {
+		std::fstream read(path);
+		std::string line;
+
+		bool tagFound = false;
+		std::string tag = "";
+		std::string c = "";
+		while (getline(read, line)) {
+			tagFound = false;
+			tag = "";
+			c = "";		
+			for (size_t i = 0; i < line.length(); i++) {
+				if (line[i] == '=' && tag != "") { if (TAG == tag) { tagFound = true; continue; } else { continue; } }
+				else if (!tagFound) { tag += line[i]; }
+				else if (tagFound) { c += line[i]; }
+			}
+			if (c != "") {
+				for (int i = 0; i < COLOR_COUNT; i++) {
+					if (c == colorNames[i]) { return colors[i]; }
+				}
+			}
+	}
+	return colors[RESET];
 	}
 }

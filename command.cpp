@@ -11,7 +11,7 @@
 
 std::string writeTags (std::vector<std::string> tags) {
 	std::string output;
-	for (const auto& t : tags) { output += t; output += " ";}
+	for (const auto& t : tags) { output += getColor(t) + t + getColor("RESET"); output += " ";}
 	return output;
 }
 
