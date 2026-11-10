@@ -1,9 +1,9 @@
 main|main.cpp|main
 command|command.cpp|
-commandH|command.h|
-fileH|fileParsing.h|
+commandH|command.h|header
+fileH|fileParsing.h|header
 file|fileParsing.cpp|
 message|message.cpp|
-messageH|message.h|
+messageH|message.h|header
 README|README.md|
-colorH|color.h|
+colorH|color.h|header
