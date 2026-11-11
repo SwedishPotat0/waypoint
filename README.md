@@ -65,8 +65,6 @@ To creat local waypoints you begin whit runing the `init` command to initilise a
 
 Thru the `link` command can you link a directory where you have local waypoints whit the command `waypoint link project path` and then accses them anywhere whit `waypoint open project:file` or if you want to open all files you can use `waypoint open project:all` 
 
-**Note: Waypoint does not currently check if a directory you link to have local waypoints**
-
 ## Coloerd tags
 
 You can have colord tags by having a colors.txt in the .waypoint/ directory and follow the format [tagname]=[color]
@@ -218,3 +216,4 @@ Waypoint has a selection of simple commands, these are:
 - [x] Add ability to open all in a linked directory
 
 - [x] Make it possibale to have colored tags / waypoints
+    - [ ] Make it so that you don't have to interface whit the colors.txt to set colors for tags
